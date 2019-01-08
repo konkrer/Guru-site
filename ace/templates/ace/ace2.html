@@ -1,0 +1,126 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>VTX-Guru</title>
+
+    <!-- Bootstrap core CSS -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
+      <img onclick="window.location='{% url 'home' %}';" style="cursor: pointer;" src="{% static 'guru (1).png' %}"  class="d-inline-block align-top" />
+      <h5  onclick="window.location='{% url 'home' %}';" style="cursor: pointer; "class="my-0 mr-md-auto text-white font-weight-normal">VTX-Guru</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-white" href="#"><span class="oi oi-magnifying-glass"></span> Search</a>
+        <a class="p-2 text-white" href="#">Tables</a>
+        <a class="p-2 text-white" href="{% url 'analyze' %}">Analyze</a>
+        <a class="p-2 text-white" href="#">About</a>
+      </nav>
+      <!--<a class="btn btn-outline-primary" href="#">Sign up</a>-->
+    </div>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">IMD ACE <img src="{% static 'wifi.png' %}" height="90" width="90" /></h1>
+      <p>Transmitting on two or more FPV video channels simultaneously can cause problems. Enter two or more channels to check for interference.
+      Enter Band Channel abbreviation or four digit frequency.</p> 
+      <p>Bands: A - B - E - F - R(C) - L   -- Channels: 1-8</p>
+      <form method="POST" action="{% url 'analyze' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="text" name="channel_group" />
+
+      <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" />
+      Channels: 
+      {% for print in printable %}
+      {{ print }}-
+      {% endfor %}
+      -- Frequencies: 
+      {% for convert in converted %}
+      {{ convert }}
+      {% endfor %}
+
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Scores</h2>
+        <h6>Video Clarity Score: {{ score_alt }}</h6>
+        <br/>
+        <h6>Weighted V.C.S. Score: {{ score_alt_weighted }}</h6>
+        <br/>
+        <p >Raw I.M.D. Score: {{ IMD_score }}</p>
+        <li><small class="text-muted">Top score is 100</small></li>
+        <li><small class="text-muted">Weighted VCS is for 5 and 6 channel groups</small></li>
+        <li><small class="text-muted">Best in category gets weighted score of 100</small></li>
+      </div>
+      <div class="col-md-4">
+        <h2>Properties</h2>
+        <p >Closest IMD to channel: {{ closest_imd }} MHz</p>
+        <p >Number of problem IMD: {{ divide_by }}</p>
+        <p >Times IMD close to chan: {{ IMD_close_to_chan }}</p>
+        <p >Min VTX separation: {{ closest_broadcast }} MHz</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Problems</h2>
+        {% for warning in warnings %}
+        <p >{{ warning }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+        <h2>IMD Frequencies</h2>
+        {% for set in imd_freqz %}
+        <p >{{ set }}</p>
+        {% endfor %}
+      </div>
+      <div class="col-md-4">
+      </div>
+  </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+
+</main>
+
+<footer class="container">
+  <p>&copy; Konkrer 2019</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script></body>
+</html>

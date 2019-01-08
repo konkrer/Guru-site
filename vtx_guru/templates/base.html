@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
     <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
 
 
@@ -20,16 +21,16 @@
     <link href="pricing.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body style="background:url('{% static 'beach-landscape.jpg' %}')">
 
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <img src="{% static 'guru (1).png' %}"  class="d-inline-block align-top" />
-      <h5 class="my-0 mr-md-auto font-weight-normal">VTX-Guru</h5>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
+      <img onclick="window.location='{% url 'home' %}';" style="cursor: pointer;" src="{% static 'guru (1).png' %}"  class="d-inline-block align-top" />
+      <h5  onclick="window.location='{% url 'home' %}';" style="cursor: pointer; "class="my-0 mr-md-auto text-white font-weight-normal">VTX-Guru</h5>
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#"><span class="oi oi-magnifying-glass"></span> Search</a>
-        <a class="p-2 text-dark" href="#">Tables</a>
-        <a class="p-2 text-dark" href="#">Analyze</a>
-        <a class="p-2 text-dark" href="#">About</a>
+        <a class="p-2 text-white" href="#"><span class="oi oi-magnifying-glass"></span> Search</a>
+        <a class="p-2 text-white" href="#">Tables</a>
+        <a class="p-2 text-white" href="{% url 'analyze' %}">Analyze</a>
+        <a class="p-2 text-white" href="#">About</a>
       </nav>
       <!--<a class="btn btn-outline-primary" href="#">Sign up</a>-->
     </div>
@@ -47,37 +48,23 @@
 
       <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
-          <div class="col-12 col-md">
-            <img class="mb-2" src="../../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+          <div class="col-12 col-md">        
+            <small class="d-block mb-3 text-white">konkrer &copy; 2019</small>
           </div>
-          <div class="col-6 col-md">
-            <h5>Features</h5>
+          <div class="col-6 col-md text-white">
+            <h4>Links</h4>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Cool stuff</a></li>
-              <li><a class="text-muted" href="#">Random feature</a></li>
-              <li><a class="text-muted" href="#">Team feature</a></li>
-              <li><a class="text-muted" href="#">Stuff for developers</a></li>
-              <li><a class="text-muted" href="#">Another one</a></li>
-              <li><a class="text-muted" href="#">Last time</a></li>
+              <li><a class="text-white" href="https://github.com/konkrer/VTX-Guru">Investigate</a></li>
+              <li><a class="text-white" href="#">konk-site</a></li>
+              <li class="text-muted">Paradox</li>
             </ul>
           </div>
-          <div class="col-6 col-md">
-            <h5>Resources</h5>
+          <div class="col-6 col-md text-white">
+            <h4>About</h4>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Resource</a></li>
-              <li><a class="text-muted" href="#">Resource name</a></li>
-              <li><a class="text-muted" href="#">Another resource</a></li>
-              <li><a class="text-muted" href="#">Final resource</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Team</a></li>
-              <li><a class="text-muted" href="#">Locations</a></li>
-              <li><a class="text-muted" href="#">Privacy</a></li>
-              <li><a class="text-muted" href="#">Terms</a></li>
+              <li><a class="text-white" href="#">Scoring</a></li>
+              <li><a class="text-white" href="#">IMD</a></li>
+              <li><a class="text-white" href="#">Metrics</a></li>
             </ul>
           </div>
         </div>

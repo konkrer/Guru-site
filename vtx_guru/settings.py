@@ -54,7 +54,7 @@ ROOT_URLCONF = 'vtx_guru.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['vtx_guru/templates', 'ace/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
