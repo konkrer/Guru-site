@@ -16,11 +16,11 @@
     <div class="container">
       <h1 class="display-3">IMD ACE <img src="{% static 'wifi.png' %}" height="90" width="90" /></h1>
       <p>Transmitting on two or more FPV video channels simultaneously can cause problems. Enter two or more channels to check for interference.
-      Enter Band Channel abbreviation or four digit frequency.</p> 
+      Enter Band Channel abbreviation and/or four digit frequency.</p> 
       <p>-Bands: A - B - E - F - R(C) - L   -Channels: 1-8</p>
       <form method="POST" action="{% url 'analyze' %}" enctype="multipart/form-data">
       {% csrf_token %}
-      <input type="text" name="channel_group" />
+      <input type="text" name="channel_group" placeholder="E.g. F1 5645"/>
 
       <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" />
 
@@ -32,28 +32,10 @@
     <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-4">
-        <h2>Scores</h2>
-        <h6>Video Clarity Score: {{ score_alt }}</h6>
-        <br/>
-        <h6>Weighted V.C.S. Score: {{ score_alt_weighted }}</h6>
-        <br/>
-        <p >Raw I.M.D. Score: {{ IMD_score }}</p>
-        <li><small class="text-muted">Top score is 100</small></li>
-        <li><small class="text-muted">Weighted VCS is for 5 and 6 channel groups</small></li>
-        <li><small class="text-muted">Best in category gets weighted score of 100</small></li> 
       </div>
       <div class="col-md-4">
-        <h2>Properties</h2>
-        <p >Closest IMD to channel: {{ closest_imd }}</p>
-        <p >Number of problem IMD: {{ divide_by }}</p>
-        <p >Times IMD close to chan: {{ IMD_close_to_chan }}</p>
-        <p >Min VTX separation: {{ closest_broadcast }}</p>
       </div>
       <div class="col-md-4">
-        <h2>Problems</h2>
-        {% for warning in warnings %}
-        <p>{{ warning }}</p>
-        {% endfor %}
       </div>
     </div>
 

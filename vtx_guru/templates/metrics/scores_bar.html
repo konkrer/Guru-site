@@ -1,0 +1,16 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+    <!-- Example row of columns -->
+    <h2 class="text-center">Scores distribution per study group.</h2>
+    <div class="row">
+      <div class="col-md-12">
+      	<img class="img-fluid" src="{% static 'plots/Scores_Dist_Barchart.png' %}" />       
+      </div>
+    </div>
+</div>
+
+{% endblock %}

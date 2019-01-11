@@ -22,5 +22,16 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('search/', include('search.urls')),
     path('analyze/', include('ace.urls')),
+    path('tables/', include('charts.urls')),
+    path('scores', views.scores, name='scores'),
+    path('IMD', views.IMD, name='IMD'),
+    path('metrics', views.metrics, name='metrics'),
+    path('boxplot', views.boxplot, name='boxplot'),
+    path('piechart', views.piechart, name='piechart'),
+    path('chan_occur', views.chan_occur, name='chan_occur'),
+    path('scores_bar', views.scores_bar, name='scores_bar'),
+    path('bands_bar', views.bands_bar, name='bands_bar'),
+    path('freq_dist', views.freq_dist, name='freq_dist'),
 ]

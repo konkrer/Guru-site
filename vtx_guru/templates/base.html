@@ -18,7 +18,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="pricing.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/4.2/examples/pricing/pricing.css" rel="stylesheet">
   </head>
 
   <body style="background:url('{% static 'beach-landscape.jpg' %}')">
@@ -27,10 +27,10 @@
       <img onclick="window.location='{% url 'home' %}';" style="cursor: pointer;" src="{% static 'guru (1).png' %}"  class="d-inline-block align-top" />
       <h5  onclick="window.location='{% url 'home' %}';" style="cursor: pointer; "class="my-0 mr-md-auto text-white font-weight-normal">VTX-Guru</h5>
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-white" href="#"><span class="oi oi-magnifying-glass"></span> Search</a>
-        <a class="p-2 text-white" href="#">Tables</a>
+        <a class="p-2 text-white" href="{% url 'search' %}"><span class="oi oi-magnifying-glass"></span> Search</a>
+        <a class="p-2 text-white" href="{% url 'tables' %}">Tables</a>
         <a class="p-2 text-white" href="{% url 'analyze' %}">Analyze</a>
-        <a class="p-2 text-white" href="#">About</a>
+        <a class="p-2 text-white" href="{% url 'scores' %}">About</a>
       </nav>
       <!--<a class="btn btn-outline-primary" href="#">Sign up</a>-->
     </div>
@@ -45,7 +45,7 @@
 
 
 
-
+    <div class="container">
       <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
           <div class="col-12 col-md">        
@@ -55,16 +55,16 @@
             <h4>Links</h4>
             <ul class="list-unstyled text-small">
               <li><a class="text-white" href="https://github.com/konkrer/VTX-Guru">Investigate</a></li>
-              <li><a class="text-white" href="#">konk-site</a></li>
+              <li><a class="text-white" href="http://206.189.170.154">konk-site</a></li>
               <li class="text-muted">Paradox</li>
             </ul>
           </div>
           <div class="col-6 col-md text-white">
             <h4>About</h4>
             <ul class="list-unstyled text-small">
-              <li><a class="text-white" href="#">Scoring</a></li>
-              <li><a class="text-white" href="#">IMD</a></li>
-              <li><a class="text-white" href="#">Metrics</a></li>
+              <li><a class="text-white" href="{% url 'scores' %}">Scoring</a></li>
+              <li><a class="text-white" href="{% url 'IMD' %}">IMD</a></li>
+              <li><a class="text-white" href="{% url 'metrics' %}">Metrics</a></li>
             </ul>
           </div>
         </div>
@@ -77,9 +77,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script>
       Holder.addTheme('thumb', {
         bg: '#55595c',

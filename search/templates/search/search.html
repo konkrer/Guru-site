@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+{% if error %}
+<br/>
+<h2 class="text-center">{{ error }}</h2>
+<br/>
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-12">
+      	{% if error == 'Nothing found!' %}
+      	{% if error_addit %}
+      	<h6 class="text-center">{{ error_addit }}</h6>
+      	{% endif %}
+        <h6 class="text-center">Number of pilots: {{ num_pilots }}</h6>
+        <h6 class="text-center">VTX channel choices: {{ chan_choices }}</h6>
+        {% if chan_choices == '40 channel' %}
+        <h6 class="text-center">Number of 40 channel VTX's: {{ 40_avilb }}</h6>
+        {% endif %}
+        {% if chan_choices == '40 chan plus lowband' %}
+        <h6 class="text-center">Number of lowband VTX's: {{ low_avilb }} --|-- Number of 40 channel VTX's: {{ 40_avilb }}</h6>
+        {% endif %}
+        <h6 class="text-center">Channels searched: -- 
+        {% for channel in channels_abbrev %}
+        {{ channel }}
+        {% endfor %} -- 
+        {% for channel in channels_freqz %}
+        {{ channel }}
+        {% endfor %}
+        </h6>
+        {% endif %}
+        <br/>
+        <br/>
+      </div>
+    </div> 
+  </div>
+
+{% endif %}
+
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Smart Search <img src="{% static 'search.png' %}" height="90" width="90" /></h1>
+      <p>Find a high clarity VTX channel group for three to six FPV pilots, while ensuring as few as possible pilots 
+      	need to change channels. VTX Guru will find the best rated group that contains as many of the given channels 
+  		as possible.</p> 
+  	  <p>To see the top scoring groups leave channels entry blank.</p> 
+      <p>Only groups possessing a passing Video Clarity Score (VCS) are searched. Top score is 100.</p>
+      <br/>
+      <h5>Search parmaters:</h5>
+      <form method="POST" action="{% url 'search' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <section>
+      	<span>Number of Pilots: </span>
+      	<input type="radio" name="num_pilots" value=3 id="3">
+      	<label for="3">3</label>
+      	<input type="radio" name="num_pilots" value=4 id="4">
+      	<label for="4">4</label>
+      	<input type="radio" name="num_pilots" value=5 id="5" checked="checked">
+      	<label for="5">5</label>
+      	<input type="radio" name="num_pilots" value=6 id="6">
+      	<label for="6">6</label>
+      </section>
+      <section>
+      	<span>VTX channel choices: </span>
+      	<input type="radio" name="chan_choices" value="USA legal only" id="usa">
+      	<label for="usa">USA legal only </label>
+      	<input type="radio" name="chan_choices" value="40 channel" id="40_chan" checked="checked">
+      	<label for="40_chan">40 channel </label>
+      	<input type="radio" name="chan_choices" value="40 chan plus lowband" id="40_low">
+      	<label for="40_low">40 chan plus lowband </label>
+      </section>
+      <section>
+      	<label for="40_avilb">If 40 channel or lowband selected - how many pilots have 40 channel VTX's?:</label>
+		  <select id="40_avilb" name="40_avilb" >
+		    <option value=2 >2 or more</option>
+		    <option value=1 >1</option>
+		    <option value=0 >None</option>		    
+		  </select>
+      </section>
+      <section>
+      	<label for="low_avilb">If lowband selected - how many pilots have lowband VTX's?:</label>
+		  <select id="low_avilb" name="low_avilb" >
+		    <option value=1 >1</option>	
+		    <option value=2 >2</option>
+		    <option value=3 >3</option>	
+		    <option value=4 >4 or more</option>    
+		  </select>
+      </section>
+      <br/>
+      <section>
+        <label for="chan_grp"><h5>VTX channels pilots are already on: </h5></label>      
+        <input type="text" name="channel_group" id="chan_grp" placeholder="E.g. F1 5645" />
+        <input class="btn btn-primary" type="submit" value="Search" name="search" />
+      </section>
+      </form>
+      <br/>
+      <li class="text-muted"><small>Enter Band Channel abbreviation and/or four digit frequency. -- Bands: A - B - E - F - R(C) - L   -- Channels: 1-8</small></li> 
+      <li class="text-muted"><small>40 channel means all of bands A B E F & R(C)</small></li>
+      <li class="text-muted"><small>USA only means 40 channel set minus channels E4 E7 E8</small></li>
+      <li class="text-muted"><small>W.VCS means weighted video clarity score. For 5 & 6 channel groups.</small></li>
+      <li class="text-muted"><small>All C band entries will shown as R. They are the same band.</small></li>
+      <li class="text-muted"><small>F8 and R7 both are 5880MHz. Only R7 shown in results if both are entered.</small></li>
+    </div>
+  </div>
+
+
+</main>
+{% endblock %}
