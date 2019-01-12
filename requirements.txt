@@ -1,0 +1,4 @@
+-i https://pypi.org/simple
+django==2.1.5
+psycopg2-binary==2.7.6.1
+pytz==2018.9
