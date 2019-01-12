@@ -34,4 +34,5 @@ urlpatterns = [
     path('scores_bar', views.scores_bar, name='scores_bar'),
     path('bands_bar', views.bands_bar, name='bands_bar'),
     path('freq_dist', views.freq_dist, name='freq_dist'),
+    path('credits', views.credits, name='credits'),
 ]

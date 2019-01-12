@@ -15,9 +15,9 @@
   <div class="jumbotron">
     <div class="container">
       <h1 class="display-3">Smart Search <img src="{% static 'search.png' %}" height="90" width="90" /></h1>
-      <p>Find a high clarity VTX channel group for three to six FPV pilots, while ensuring 
-  as few as possible pilots need to change channels. VTX Guru will find the 
-  best rated group that contains as many of the given channels as possible.</p>
+      <p>Find a high clarity VTX channel group for three to six FPV pilots, while ensuring as few as possible pilots 
+      need to change channels. VTX Guru will find the best rated groups that contain as many of the given channels 
+      as possible.</p> 
       <p>To see the top scoring groups leave channels entry blank.</p> 
       <p>Only groups possessing a passing Video Clarity Score (VCS) are searched. Top score is 100.</p>
       <br/>
@@ -42,7 +42,7 @@
       	<input type="radio" name="chan_choices" value="40 channel" id="40_chan" checked="checked">
       	<label for="40_chan">40 channel </label>
       	<input type="radio" name="chan_choices" value="40 chan plus lowband" id="40_low">
-      	<label for="40_low">40 chan plus lowband </label>
+      	<label for="40_low">40 channel plus lowband </label>
       </section>
       <section>
       	<label for="40_avilb">If 40 channel or lowband selected - how many pilots have 40 channel VTX's?:</label>
@@ -60,6 +60,21 @@
 		    <option value=3 >3</option>	
 		    <option value=4 >4 or more</option>    
 		  </select>
+      </section>
+      <section>
+        <span>Lock entered channels for hard to change VTX's:</span>
+        <input type="checkbox" name="lock_chan1" value=0 id="1">
+        <label for="1" > 1 </label>
+        <input type="checkbox" name="lock_chan2" value=1 id="2">
+        <label for="2" > 2 </label>
+        <input type="checkbox" name="lock_chan3" value=2 id="3">
+        <label for="3" > 3 </label>
+        <input type="checkbox" name="lock_chan4" value=3 id="4">
+        <label for="4" > 4 </label>
+        <input type="checkbox" name="lock_chan5" value=4 id="5">
+        <label for="5" > 5 </label>
+        <input type="checkbox" name="lock_chan6" value=5 id="6">
+        <label for="6" > 6 </label>        
       </section>
       <br/>
       <section>
@@ -98,6 +113,13 @@
         {% for channel in channels_freqz %}
         {{ channel }}
         {% endfor %}
+        </h6>
+        {% if locked_channels %}
+        <h6 class="text-center">Locked channels: -- 
+        {% for channel in locked_channels %}
+        {{ channel }}
+        {% endfor %}
+        {% endif %}
         </h6>
         <br/>
         <br/>
@@ -142,10 +164,6 @@
         {% endif %} 
       </div>
     </div>
-
-    <hr>
-
   </div> <!-- /container -->
-
 </main>
 {% endblock %}

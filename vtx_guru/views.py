@@ -29,3 +29,6 @@ def bands_bar(request):
 
 def freq_dist(request):
 	return render(request, "metrics/freq_dist.html")
+
+def credits(request):
+	return render(request, "credits.html")

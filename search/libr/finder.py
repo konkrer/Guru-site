@@ -11,7 +11,7 @@ module_dir = os.path.dirname(__file__)  # get current directory
 
 def smart_lookup(num_pilots=None, usa_only=None, group_to_find=None,
 				E_extra_max = None, add_lowband = False, L_max = None,
-				printz=True):
+				printz=True, lock_chan_idx=False):
 
 	entered_f8 = False
 	output_list = []
@@ -237,6 +237,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 	E_extra_list = ['e4', 'e7', 'e8']
 	L_list = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8']
 
+
 	for i in range(len(group_list)):
 		
 		matches = 0
@@ -244,6 +245,15 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 		L_match = 0
 		group = get_chan_group(group_list[i])
 		
+		# make sure locked chans in group
+		if lock_chan_idx:
+			lock_matches = 0
+			for idx in lock_chan_idx:
+				if group_to_find[int(idx)] in group:
+					lock_matches += 1
+			if lock_matches != len(lock_chan_idx):
+				continue
+
 		#print(E_extra_max)
 		if (usa_only == False) and (int(E_extra_max) < 2):
 			for extra in E_extra_list:
