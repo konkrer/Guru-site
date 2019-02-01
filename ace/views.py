@@ -8,7 +8,7 @@ def analyze(request):
 
             input_group_init = request.POST['channel_group'].split(' ')           
             if len(input_group_init) > 1:
-                input_group = [x for x in input_group_init if x != '']
+                input_group = [x.lower() for x in input_group_init if x != '']
 
                 if  len(input_group) > 8:
                 	return render(request, "ace/ace.html", {'error': 'Too many channels'})
