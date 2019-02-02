@@ -38,6 +38,26 @@
       <li class="lead text-muted">Lowband tables for 4, 5, & 6 pilots show the first 1000 entries only.</li>       
     </div>
   </div>
+  <div class="container">
+    <h4>USA channels observations:</h4>
+    <br/>
+    <p>When moving from the best U.S. legal 6 channel group - R1 R2 F2 F4 R7 R8 - to a 5 channel group (i.e. a pilot leaves)
+       the best 5 channel subset is achieved by dropping F4 from the group. R1 R2 F2 R7 R8 - weighted video clarity score 72.7.
+    </p>
+    <p>If a pilot leaves other than the F4 pilot, the F4 pilot can move to the channel of the pilot that just left, you will 
+      now be using this best subset. This takes one swap. Interestingly though, if the pilots on channels R2 or F2 happen to leave, 
+      for the same one swapped channel a considerably better 5 channel group can be achieved. If R2 or F2 leaves - let's say R2 -
+      have the other one - F2 in our example - move to B2. Bam! Now your on - B2 F4 R1 R7 R8 - with a weighted video clarity score  
+      of 81.2.
+    </p>
+    <br/>
+    <br/>
+    <h4>40 channels observations:</h4>
+    <br/>
+    <p>What is the best 5 channel group from the 40 channel set? Interestingly - A5 E8 F6 R1 R2 - has the best IMD score of them all. 
+      The question is how much does it matter that two channels are 37MHz apart and not 40MHz apart? Is the algorithm reducing 
+      the score appropriately? Or could this be the best group for this set?
+    </p>
 </main>
 {% endblock %}
 
