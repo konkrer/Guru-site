@@ -1,6 +1,6 @@
 {% extends 'base2.html' %}
 {% load staticfiles %}
-
+ 
 
 {% block content %}
 {% if error %}
@@ -22,21 +22,28 @@
       {% csrf_token %}
       <input type="text" name="channel_group" placeholder="E.g. F1 5645"/>
 
-      <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" />
-      Channels: 
-      {% for print in printable %}
-      {{ print }}-
-      {% endfor %}
-      -- Frequencies: 
-      {% for convert in converted %}
-      {{ convert }}
-      {% endfor %}
+      <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" /><span class="text-bold"><big>  
+      </span>
+      </big>
+    
 
       </form>
     </div>
   </div>
 
   <div class="container">
+    <h4 class="text-center text-thin">
+      Channels: 
+      {% for print in printable %}
+      {{ print }}  
+      {% endfor %}
+      -- Frequencies: 
+      {% for convert in converted %}
+      {{ convert }}
+      {% endfor %}
+    </h4>
+    <br/>
+    <br/>
     <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-4">
