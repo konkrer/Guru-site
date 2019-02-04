@@ -26,9 +26,6 @@ class FreqSet:
     self.scores = []
 
 
-
-
-
   def get_input(self, printz=True, channels=6, quit_on=2):
     
     self.group = []
@@ -59,9 +56,11 @@ class FreqSet:
     
 """)   
 
-    
-    for i in range(0, int(channels)):
+    # for each channel
+    for i in range(int(channels)):
+      # ask appropritate question 
       continue_on = self.ask_question(i, quit_on)
+      # if user enters 'done' or enters all chans at once we're done
       if continue_on == False:
         print('\n\n')
         return
@@ -75,69 +74,71 @@ class FreqSet:
     questions =[
       "\n-- Enter first VTX channel -OR-\n-- Enter entire group at once ==> ",
       "\n-- Enter second video channel => ",
-      "\n-- Enter third video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter fourth video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter fifth video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter sixth video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter seventh video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter eighth video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter ninth video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter tenth video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 11th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 12th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 13th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 14th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 15th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 16th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 17th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 18th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 19th video channel\n-- (Enter D if done) ==========> ",
-      "\n-- Enter 20th video channel\n-- (Enter D if done) ==========> ",
+      "\n-- Enter {0} video channel\n-- (Enter D if done) ==========> ",
       "\n-- Enter next video channel\n-- (Enter D if done) ==========> ",
       "\n-- Enter second video channel\n-- (Enter D if done) ==========> ",
       ] 
 
+    numbers = ['third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', \
+    'tenth', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th']
 
     while True:
 
+      # if quiting on second question is an option
       if (ques_num == 1) and (quit_on == 1):
         answer = input(questions[-1]).lower().strip(' ')
 
+      # for 21st question and after just ask for next channel
       elif (ques_num > 19):
         answer = input(questions[-2]).lower().strip(' ')
-      else:
+
+      # for 1st and 2nd question use index to select question
+      elif (ques_num < 2):
         answer = input(questions[ques_num]).lower().strip(' ')
+
+      # else use standard question and plug in channel number  
+      else:
+        answer = input(questions[2].format(numbers[ques_num -2])).lower().strip(' ')
       
+      # for 1st question
       if ques_num == 0:
         
+        # if entry is multiple - split and remove empty strings
         input_group_init = answer.split(' ')           
         if len(input_group_init) > 1:
           input_group = [x for x in input_group_init if x != '']
 
+          # more than 40 is too many, start over
           if  len(input_group) > 40:
             print('\n----- Try again. -----')
             continue
 
+          # if an entry is Not a channel that's Not ok
           ok = True
           for chan in input_group:
             if not check_channel_input(chan):
               ok = False
               break
 
+          # if inputs all were legit channels assign them to self.group
           if ok:
             self.group = input_group
+            # no need to continue asking questions as group entry worked!
             return False
 
+          # if not ok ask question again/start over
           else:
             continue
 
-
+      # if we allow quitting at this question
       if ques_num >= int(quit_on):
+        # check for 'done' entry, if so quit asking questions (return False)
         if answer == 'd':        
           return False
 
-      
+      # otherwise if entry is legit
       if check_channel_input(answer):
+        # add to self.group, return True to continue asking questions if there are more 
         self.group.append(answer)
         return True
 
@@ -149,21 +150,21 @@ class FreqSet:
   
     all_imd_freqs = []
   
-    for i in range(len(group)):
+    # for each channel 
+    for channel in group: 
 
-      # for each channel create a list of all other channels
-      rest = group[:i] + group[i + 1:]
+      # create a list of all other channels
+      rest = filter(lambda x: (x != channel), group) 
       imd_freqs = []
 
       # compute IMD for channel and each other channel
-      for n in range(len(rest)):
+      for chan in rest: 
 
-        imd_freq = (int(group[i]) * 2) - int(rest[n])
+        imd_freq = (int(channel) * 2) - int(chan)
         imd_freqs.append(imd_freq)
       
       # compile all sublists 
       all_imd_freqs.append(imd_freqs)
-
 
     return all_imd_freqs
 
@@ -335,7 +336,7 @@ class FreqSet:
 
   def score(self, group, printz=True):
     
-    bad_freq = self.check_freqz(group)
+    IMD_freqz = self.check_freqz(group)
     score_total = 0
     divide_by = 0
     IMD_close_to_chan = 0
@@ -368,19 +369,20 @@ class FreqSet:
 
  
 
-    # for IMD score
+    # for unique IMD score
     unique_prob_imd = []
     score_total_uniq = 0
     divide_by_uniq = 0
 
    # for each IMD freq
-    for sublst in bad_freq:
-      for x in sublst:
-        # then for each channel
+    for sublst in IMD_freqz:
+      for IMD_freq in sublst:
         worst = None
+
+        # then for each channel       
         for chan in group:
           # if seperation less than 35MHz
-          diff3 = abs(x - chan)
+          diff3 = abs(IMD_freq - chan)
           if diff3 < 35:
 
             # count every time IMD is close to a channel
@@ -396,14 +398,19 @@ class FreqSet:
         # if IMD was closer than 35 MHz to a channel
         if worst != None:
 
-          # for unique IMD freqs score
-          if (x not in unique_prob_imd):
+          # for each problem IMD, use least separation of that IMD to a channel to compute a reducing score
+          # and keep running sum of squared reducing scores and of number of scores to divde by later
+          to_add = (35 - worst) ** 2
+          score_total += to_add
+          divide_by += 1
+
+          # for calculating unique IMD freqs score
+          if (IMD_freq not in unique_prob_imd):
             # for each problem IMD, use least separation of that IMD to a channel to compute a reducing score
             # and keep running sum of squared reducing scores and of number of scores to divde by later
-            to_add = (35 - worst) ** 2
             score_total_uniq += to_add
             divide_by_uniq += 1
-            unique_prob_imd.append(x)
+            unique_prob_imd.append(IMD_freq)
 
             # keep track of overall worst offender - closest IMD to channel
             if closest_imd == None:
@@ -411,32 +418,31 @@ class FreqSet:
             else:
               if worst < closest_imd:
                 closest_imd = worst
-
-          # for each problem IMD, use least separation of that IMD to a channel to compute a reducing score
-          # and keep running sum of squared reducing scores and of number of scores to divde by later
-          to_add = (35 - worst) ** 2
-          score_total += to_add
-          divide_by += 1
            
+    # ratio = (IMD_close_to_chan / len(group))
 
-    #ratio = (IMD_close_to_chan / len(group))
-
-    if printz: 
-      print(" Number of Problem \n IMD frequencies: ============> " + str(divide_by) + "\n")
-      print(" Times problem IMD freq \n is close to VTX channel: ====> " + str(IMD_close_to_chan) + "\n")
-      #print(" Problem IMD close / Channels \n ratio is: ===================> " + str(round(ratio, 1)) + "\n")
-      print(" Minimum Problem IMD\n frequency seperation\n to VTX channel: =============> " + str(closest_imd) + " MHz\n")
-
+    # if there were problem IMD frequencies
     if divide_by != 0:
+
+      # calculate two IMD scores
       IMD_score =  100 - (((float(score_total) /divide_by) ** .5) * 2.857142857)  
       IMD_score_uniq =  100 - (((float(score_total_uniq) /divide_by_uniq) ** .5) * 2.857142857)
+
       # use the lower of these two scores
       if IMD_score_uniq < IMD_score:
         IMD_score = IMD_score_uniq
         divide_by = divide_by_uniq
 
-      IMD_score *= (1 - (IMD_close_to_chan / 30))  # to reduce proportional to times IMD was close to channels in total
+      # to reduce proportional to times IMD was close to channels in total
+      IMD_score *= (1 - (IMD_close_to_chan / 30))  
 
+    if printz: # print stats
+      print(" Number of Problem \n IMD frequencies: ============> " + str(divide_by) + "\n")
+      print(" Times problem IMD freq \n is close to VTX channel: ====> " + str(IMD_close_to_chan) + "\n")
+      #print(" Problem IMD close / Channels \n ratio is: ===================> " + str(round(ratio, 1)) + "\n")
+      print(" Minimum Problem IMD\n frequency seperation\n to VTX channel: =============> " + str(closest_imd) + " MHz\n")
+
+    # fail condition - IMD matches VTX channel
     if closest_imd == 0:
       score_alt = 0
       IMD_score = 0
@@ -446,6 +452,7 @@ class FreqSet:
         else:
           print(" Minimum VTX\n channel separation  =========> %sMHz\n" % (closest_broadcast))
     
+    # fail condition - VTX channels less than 27MHz separation
     elif closest_broadcast <= 27:
       score_alt = 0
       if printz:
@@ -453,6 +460,7 @@ class FreqSet:
     
     else:
 
+      # if a separation is less than 40 MHz calculate broadcast factor 
       if closest_broadcast < 40:
            
         if closest_broadcast < 35:
@@ -471,43 +479,49 @@ class FreqSet:
         else:
           broadcast_factor = (1 - (broad_score / (26 - broad_score)))
 
-
+      # if there are problem IMD frequencies
       if divide_by != 0:
+        # set score_alt to IMD_score for further calculations
         score_alt = IMD_score 
         
+        # to reduce score proportional to close broadcast channels
         if broadcast_factor:   
-          score_alt *= broadcast_factor  # to reduce proportional to close broadcast channels
-                 
-          
+          score_alt *= broadcast_factor  
+                         
+        # if no broadcast factor print separation info now
         else:
           if printz:
             print(" Minimum VTX\n channel separation  =========> %sMHz\n\n" % (closest_broadcast))
         
-        
+        # create weighted score if 6 channel group
         if len(group) == 6:
 
-          # scale so top scoring 6 group now scores 100 (multipling by appropriate factor). IMD6 now scores 62.3 (non-lowband groups)        
+          # scale so top scoring 6 channel group (from 40 channel set) now scores 100. IMD6 now scores 62.3         
           score_alt_weighted = round(score_alt * 2.204, 1) 
           
-        
+        # create weighted score if 5 channel group
         elif len(group) == 5:
           
-          # compress range of 5 group scores so when top scoring group (80) becomes 100 (+20) IMD5 now scores 62.3 (non-lowband groups)
+          # compress range of 5 group scores so IMD5 now scores 62.3 (after +20 below)
           if score_alt < 80:
             compressd =  ((80 - score_alt) / 6.09) + score_alt
           else:
             compressd = score_alt
-            
+
+          # scale so top scoring 6 channel group (from 40 channel set) now scores 100 (+20)      
           score_alt_weighted = round((compressd + 20), 1) 
           
-
+      # no problem IMD's results in 100 IMD score
       else:
         IMD_score = 100.00
 
+        # no VTX separation less than 40MHz score_alt is also 100
         if broadcast_factor == None:
           score_alt = 100.00
+          # if printz print separation info now
           if printz:
             print(" Minimum VTX\n channel separation  =========> %sMHz\n\n" % (closest_broadcast))        
+        # else the score is IMD score(100) X broadcast factor
         else:
           score_alt = 100.0 * broadcast_factor
 
@@ -521,8 +535,9 @@ class FreqSet:
       if len(group) == 5:
         score_alt_weighted = round((score_alt + 20), 1)
 
-    
+    # final stats to print
     if printz:
+      # add IMD score only if it's different than score_alt
       if (broadcast_factor != None) or (closest_broadcast <= 27):
         print(" IMD Score: ==================> {:.2f}\n".format(IMD_score)) 
       print(" Video Clarity Score: ========> {:.2f}".format(score_alt))
@@ -532,14 +547,12 @@ class FreqSet:
  (weighted relevant to {number}
  channels): ==================> {score}
         """.format(number=len(group), score=score_alt_weighted))
- 
       print("\n Top Possible Score is 100\n\n\n\n")
     
     self.scores = [score_alt, score_alt_weighted, closest_broadcast, IMD_score]
 
+    # returns for web app
     return score_alt, score_alt_weighted, closest_broadcast, IMD_score, divide_by, IMD_close_to_chan, closest_imd
-
-
 
 
 
@@ -554,7 +567,7 @@ class FreqSet:
       with open(output_file, "a") as f:
         f.write("%.2f  %.2f  %s  %s   " % (self.scores[0], self.scores[3], self.scores[1], self.scores[2]))
         for chan in abbreviations:
-          f.write(str(chan) +" ")
+          f.write(str(chan).lower() +" ")
         f.write('-- ')
         for freq in converted:
           f.write(str(freq) + " ",)
@@ -568,7 +581,7 @@ class FreqSet:
       with open(self.output, "a") as f:
         f.write("%.2f  %.2f  %s  %s   " % (self.scores[0], self.scores[3], self.scores[1], self.scores[2]))
         for chan in self.group:
-          f.write(str(chan) + " ",)
+          f.write(str(chan).lower() + " ",)
         f.write('-- ')
         for freq in converted:
           f.write(str(freq) + " ",)
@@ -583,7 +596,7 @@ class FreqSet:
       with open(self.output, "a") as f:
         f.write("%.2f,%.2f,%s,%s," % (self.scores[0], self.scores[3], self.scores[1], self.scores[2]))
         for chan in self.group:
-          f.write(str(chan) + " ",)
+          f.write(str(chan).lower() + " ",)
         f.write(',')
         for freq in converted:
           f.write(str(freq) + " ",)
@@ -757,9 +770,9 @@ class FreqSet:
     else:
        with open(self.output, "a") as f:
           f.write(
-"""IMD = IMD score | WSCORE = weighted score  |  SEP = minimum VTX channel seperation
+"""IMD = IMD score | WVCS = weighted Video Clarity Score  |  SEP = minimum VTX channel seperation
 
-SCORE | IMD | WSCORE| SEP|   CHANNELS    |        FREQUENCIES        |    Sorted Frequencies\n""")
+VCS   | IMD | WVCS | SEP|   CHANNELS    |        FREQUENCIES        |    Sorted Frequencies\n""")
 
     gen = combo_explor(channels, int(num_channels))
 
@@ -774,7 +787,6 @@ SCORE | IMD | WSCORE| SEP|   CHANNELS    |        FREQUENCIES        |    Sorted
 
       flat = flatten(out)
       self.group = flat
-      #print(self.group)
 
       converted = self.convert_freq_abbreviations()
       self.score(converted, False)
@@ -792,7 +804,7 @@ SCORE | IMD | WSCORE| SEP|   CHANNELS    |        FREQUENCIES        |    Sorted
         
         if add_lowband:
           if self.scores[1] != None:
-            if self.scores[1] >= 80:
+            if self.scores[1] >= 83.3:
               self.export(converted, csv)
         else:
           if self.scores[1] != None:
@@ -820,48 +832,50 @@ def combo_explor(lst, combo_of, first_loop=True):
 
   first_count = 0
 
+  # if we're looking for a combination of 1
   if combo_of == 1:
     
     while True:
-
+      # for each item in list
       for i in range(len(lst)):
-
+        # count each time if back at begining of list 
         if i == 0:
           first_count += 1
-
-        if first_count ==2:
+        # if on second lap return None
+        if first_count == 2:
           yield (None)
-
+        # yeild item
         yield (lst[i])
 
   else:
-
+    # create list minus the remaining number of elements of combo from end of list
     end_shortened = lst[:-(combo_of-1)]
 
     while True:
-
+      # for each element in truncated list
       for i in range(len(end_shortened)):
+        # as each first element of combo iterates show progress
         if first_loop:
           print("-- WORKING.....")
+        # count each time back at begining of list
         if i == 0:
           first_count += 1
-
+        # if on second lap return None
         if first_count ==2:
           yield (None)
-
-        option = end_shortened[i]
-
+        # the actual element of the list
+        element = end_shortened[i]
+        # generator for what's left of the list to explore
         rest = combo_explor(lst[i+1:], combo_of-1, False)
 
         while True:
-
-          nxt = next(rest)           
+          # call next combo 
+          nxt = next(rest) 
+          # if nxt == None all combos explored go to next element in list          
           if nxt == None:
             break                           
-
-          yield option, nxt
-
-
+          # yeild list element plus next combo from generator
+          yield element, nxt
 
 
 
@@ -871,18 +885,20 @@ def flatten(tup):
     return None
 
   flat_list = []
-
+  # when second element is not another tuple
   if not isinstance(tup[1], tuple):
+    # just unpack 1st and 2nd element to flat_list
     flat_list = [tup[0], tup[1]]
     return flat_list
 
   else:
-
+    # first element is extracted and added to flat_list
     x = tup[0]
     flat_list.append(x)
+    # secong element is extracted and flattened
     y = tup[1]
     z = flatten(y)
-
+    # add flattened elements to flat_list
     flat_list += z
 
     return flat_list
@@ -900,7 +916,7 @@ def check_channel_input(chan_input):
       and len(chan_input) == 2:         
         return True
 
-      if (int(chan_input) <= 5945 and int(chan_input) >= 5325):        
+      if ((int(chan_input) <= 5945) and (int(chan_input) >= 5325)):        
         return True
          
       else:

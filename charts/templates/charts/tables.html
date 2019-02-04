@@ -23,12 +23,12 @@
       <p><a class="btn btn-secondary btn-lg" href="{% static 'list5low_abrv.pdf' %}" role="button">5 pilot -- lowband -- Best group* E8 F5 R1 L1 L6 &raquo;</a></p>	      
       <br/>   
      	<p><a class="btn btn-primary btn-lg" href="{% static 'list4.pdf' %}" role="button">4 pilot -- 40 channel -- Best group* B1 E4 E8 F7 &raquo;</a></p>
-        <p><a class="btn btn-primary btn-lg" href="{% static 'list4usa.pdf' %}" role="button">4 pilot -- USA only -- Best group* B1 R1 R6 R8  &raquo;</a></p>
+        <p><a class="btn btn-primary btn-lg" href="{% static 'list4usa.pdf' %}" role="button">4 pilot -- USA only -- Best group* R1 R3 R6 R8  &raquo;</a></p>
         <p><a class="btn btn-secondary btn-lg" href="{% static 'list4low_abrv.pdf' %}" role="button">4 pilot -- lowband -- Best group* E8 R4 L1 L6 &raquo;</a></p>
       </p>
       <br/>  
       	<p><a class="btn btn-primary btn-lg" href="{% static 'list3.pdf' %}" role="button">3 pilot -- 40 channel -- Best group* B3 E4 E8 &raquo;</a></p>
-        <p><a class="btn btn-primary btn-lg" href="{% static 'list3usa.pdf' %}" role="button">3 pilot -- USA only -- Best group* A4 R1 R8 &raquo;</a></p>
+        <p><a class="btn btn-primary btn-lg" href="{% static 'list3usa.pdf' %}" role="button">3 pilot -- USA only -- Best group* R1 R4 R8 &raquo;</a></p>
         <p><a class="btn btn-secondary btn-lg" href="{% static 'list3low.pdf' %}" role="button">3 pilot -- lowband -- Best group* E8 R1 L1 &raquo;</a></p>
       </p>
       <br/>
@@ -45,8 +45,8 @@
     <p>When moving from the best U.S. legal 6 channel group - R1 R2 F2 F4 R7 R8 - to a 5 channel group (i.e. a pilot leaves)
        the best 5 channel subset is achieved by dropping F4 from the group. R1 R2 F2 R7 R8 - weighted video clarity score 72.7.
     </p>
-    <p>If a pilot leaves other than the F4 pilot, the F4 pilot can move to the channel of the pilot that just left, you will 
-      now be using this best subset. This takes one swap. Interestingly though, if the pilots on channels R2 or F2 happen to leave, 
+    <p>If a pilot leaves other than the F4 pilot, the F4 pilot can move to the channel of the pilot that just left to achieve
+      using this best subset. This takes one swap. Interestingly though, if the a pilot on channels R2 or F2 happens to leave, 
       for the same one swapped channel a considerably better 5 channel group can be achieved. If R2 or F2 leaves - let's say R2 -
       have the other one - F2 in our example - move to B2. Bam! Now your on - B2 F4 R1 R7 R8 - with a weighted video clarity score  
       of 81.2.
