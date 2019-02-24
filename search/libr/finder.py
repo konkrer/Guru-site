@@ -103,7 +103,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					add_lowband = False
 					E_extra_max = input("\n-- Do at least 2 pilots have a 40 channel VTX?\n-- (Enter Y or N) =========> ").lower().strip(" ")
 					if E_extra_max == 'y':
-						E_extra_max = None
+						E_extra_max = 2
 						break
 					if E_extra_max == "n":
 						E_extra_max = 1		
@@ -126,7 +126,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 					E_extra_max = input("\n-- Do at least 2 pilots have a 40 channel VTX?\n-- Enter (Y or N) =========> ").lower().strip(" ")
 					if E_extra_max == 'y':
-						E_extra_max = None
+						E_extra_max = 2
 						break
 						
 					elif E_extra_max == "n":
@@ -144,19 +144,20 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-	if group_to_find != None:
+	if group_to_find != None: # if we passed in parameters to the function
 		if group_to_find == []:
-			digit_list = []
+			digit_clean = []
 		else:	
 			group_to_find_init = group_to_find
 			freqy = FreqSet(group_to_find)
 			digit_list = freqy.convert_freq_abbreviations() # to make sure C channels are converted to R.
-			freqy.group = digit_list 					   # to make sure C channels are converted to R.
-			group_to_find_raw = freqy.convert_to_abbreviations() # convert back abbrev.
-			group_to_find = []
-			for chan in group_to_find_raw:
-					if chan not in group_to_find:
-						group_to_find.append(chan)
+			digit_clean = [] 
+			for chan in digit_list: # get rid of doubles
+					if chan not in digit_clean:
+						digit_clean.append(chan) # digit_clean is output for channels by frequency
+			freqy.group = digit_clean					   
+			group_to_find = freqy.convert_to_abbreviations() # convert back abbrev. for analysis and output
+
 
 
 	elif group_to_find == None:
@@ -186,15 +187,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 						break
 
 			digit_list = freqy.convert_freq_abbreviations() # to make sure C channels are converted to R.
-			freqy.group = digit_list 					   # to make sure C channels are converted to R.
-
-
-			group_to_find_raw = freqy.convert_to_abbreviations()
-			
-
-			for chan in group_to_find_raw:
-				if chan not in group_to_find:
-					group_to_find.append(chan)		
+			digit_clean = [] 
+			for chan in digit_list: # get rid of doubles
+					if chan not in digit_clean:
+						digit_clean.append(chan)
+			freqy.group = digit_clean		 					   
+			group_to_find = freqy.convert_to_abbreviations() # convert back abbrev.
 			
 
 			if usa_only or (E_extra_max == 0):
@@ -308,9 +306,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 						if chan == 'r7':
 							print('F8', end=' ')		
 						else:
-							print(chan.upper(), end=' ')
+
+							print(str(chan).upper(), end=' ')
 				else:
-					print(chan.upper(), end=' ')
+					print(str(chan).upper(), end=' ')
 			print(" --")
 			print('\n\n                ------- VTX Guru suggestions: -------')
 			print("\n                 Groups contain ~ {} ~ channel matches\n".format(max_matches))
@@ -362,6 +361,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 			return None
 
 	else:
+		# if entered f8 and not r7 - entered_f8=True
 		if group_to_find != []:
 			if ('f8' in group_to_find_init):
 					if ('r7' in group_to_find_init):
@@ -389,16 +389,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 				w_score = str(get_score(list_line, 2))
 				if w_score == 'False':
 					w_score = 'None'
-				w_score += ' - '
-				score += ' - '
-				out = [score, w_score]
+				out = [score, " ", w_score, " "]
 				out.extend(group)
 
 				output_list[j].append(out)
 				if i == 4:
 					break
 
+		# reverse list
 		output_list = output_list[::-1]
+
+		# change r7 to f8 if entered_f8 and capitilize
 		if entered_f8:
 			new_group = []
 			for g in group_to_find:
@@ -407,9 +408,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$>SMART SEARCH<$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 				else:
 					new_group.append(g)
 			group_to_find = new_group
+		group_to_find_up = [str(x).upper for x in group_to_find]
 
-		group_to_find_up = [x.upper for x in group_to_find] 
-		return output_list, group_to_find_up, digit_list
+		return output_list, group_to_find_up, digit_clean
 
 
 

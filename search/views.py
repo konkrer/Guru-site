@@ -82,8 +82,7 @@ def search(request):
 				 	'low_avilb': request.POST['low_avilb'], 'channels_abbrev': channels_abbrev, 'channels_freqz': digit_list, 
 				 	'locked_channels': locked_channels})
 
-				# output list creation
-
+				# output list is list of lists. each list of num channel matches 6-1
 				top = output_list[0]
 				if input_group == []:
 					top_label = 'Top scoring'

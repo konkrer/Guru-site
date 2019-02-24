@@ -35,4 +35,5 @@ urlpatterns = [
     path('bands_bar', views.bands_bar, name='bands_bar'),
     path('freq_dist', views.freq_dist, name='freq_dist'),
     path('credits', views.credits, name='credits'),
+    path('paradox', views.paradox, name='paradox'),
 ]

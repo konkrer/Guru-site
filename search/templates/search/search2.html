@@ -22,6 +22,7 @@
       <p>Only groups possessing a passing Video Clarity Score (VCS) are searched. Top score is 100.</p>
       <br/>
       <h5>Search parmaters:</h5>
+
       <form method="POST" action="{% url 'search' %}" enctype="multipart/form-data">
       {% csrf_token %}
       <section>
@@ -80,7 +81,7 @@
       <br/>
       <section>
         <label for="chan_grp"><h5>VTX channels pilots are already on: </h5></label>      
-        <input type="text" name="channel_group" id="chan_grp" placeholder="E.g. F1 5645" />
+        <input type="text" name="channel_group" id="chan_grp" maxlength="40" placeholder="E.g. F1 5645" pattern="[a-ce-flrA-CE-FLR0-9\s]*" />
         <input class="btn btn-primary" type="submit" value="Search" name="search" />
       </section>
       </form>
@@ -129,59 +130,84 @@
     <div class="row">
       <div class="col-md-4">
         <h5>{{ top_label }} channel matches</h5>
-        <p>VCS -- W.VCS -- Group</p>
-        {% for line in top %}
-        <p>
-        {% for part in line %}
-        {{ part }}  
-        {% endfor %}
-        </p>
-        {% endfor %}
+        <table bgcolor="orange">
+          <thead>
+            <tr>
+              <th>V.C.S.</th>
+              <th>  </th>
+              <th>W.VCS</th>
+              <th>  </th>
+              <th></th>
+              <th colspan="3">Group</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for line in top %}
+            <tr>
+              {% for part in line %}
+              <td>{{ part }}</td>
+              {% endfor %}
+            </tr>
+            <tr><td></td></tr>
+            {% endfor %}        
+          </tbody>
+        </table>
       </div>
       <div class="col-md-4">
         {% if two_label != 'No' %}
         <h5>{{ two_label }} matches <span><small class="text-muted"> (better scores?)</small></span></h5>
-        <p>VCS -- W.VCS -- Group</p>
-        {% for line in two %}
-        <p>
-        {% for part in line %}
-        {{ part }}  
-        {% endfor %}
-        </p>
-        {% endfor %}
-        {% endif %}
+        <table bgcolor="yellow">
+          <thead>
+            <tr>
+              <th>V.C.S.</th>
+              <th>  </th>
+              <th>W.VCS</th>
+              <th>  </th>
+              <th></th>
+              <th colspan="3">Group</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for line in two %}
+            <tr>
+              {% for part in line %}
+              <td>{{ part }}</td>
+              {% endfor %}
+            </tr>
+            <tr><td></td></tr>
+            {% endfor %}        
+          </tbody>
+        </table>
+        {% endif %}        
       </div>
       <div class="col-md-4">
         {% if three_label != 'No' %}
         <h5>{{ three_label }} matches <span><small class="text-muted"> (better scores?)</small></span></h5>
-        <p>VCS -- W.VCS -- Group</p>
-        {% for line in three %}
-        <p>
-        {% for part in line %}
-        {{ part }}  
-        {% endfor %}
-        </p>
-        {% endfor %}
-        {% endif %} 
+        <table bgcolor="green">
+          <thead>
+            <tr>
+              <th>V.C.S.</th>
+              <th>  </th>
+              <th>W.VCS</th>
+              <th>  </th>
+              <th></th>
+              <th colspan="3">Group</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for line in three %}
+            <tr>
+              {% for part in line %}
+              <td>{{ part }}</td>
+              {% endfor %}
+            </tr>
+            <tr><td></td></tr>
+            {% endfor %}        
+          </tbody>
+        </table> 
+        {% endif %}       
       </div>
-    </div>
+    </div> <!-- /row -->
   </div> <!-- /container -->
 </main>
 {% endblock %}
-
-<!--
-          <span>Lock entered bands for pilot having single band:</span>
-        <input type="checkbox" name="lock_band" value=1 id="1">
-        <label for="1" > 1 </label>
-        <input type="checkbox" name="lock_band" value=2 id="2">
-        <label for="2" > 2 </label>
-        <input type="checkbox" name="lock_band" value=3 id="3">
-        <label for="3" > 3 </label>
-        <input type="checkbox" name="lock_band" value=4 id="4">
-        <label for="4" > 4 </label>
-        <input type="checkbox" name="lock_band" value=5 id="5">
-        <label for="5" > 5 </label>
-        <input type="checkbox" name="lock_band" value=6 id="6">
-        <label for="6" > 6 </label>        
-      </section>
--->

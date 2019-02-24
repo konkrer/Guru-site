@@ -32,3 +32,6 @@ def freq_dist(request):
 
 def credits(request):
 	return render(request, "credits.html")
+
+def paradox(request):
+	return render(request, "paradox.html")

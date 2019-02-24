@@ -18,9 +18,10 @@
       <p>Transmitting on two or more FPV video channels simultaneously can cause problems. Enter two or more channels to check for interference.
       Enter Band Channel abbreviation and/or four digit frequency.</p> 
       <p>Bands: A - B - E - F - R(C) - L   -- Channels: 1-8</p>
+
       <form method="POST" action="{% url 'analyze' %}" enctype="multipart/form-data">
       {% csrf_token %}
-      <input type="text" name="channel_group" placeholder="E.g. F1 5645"/>
+      <input type="text" name="channel_group" placeholder="E.g. F1 5645" minlength="5" maxlength="50" pattern="[a-ce-flrA-CE-FLR0-9\s]+" required/>
 
       <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" /><span class="text-bold"><big>  
       </span>
@@ -48,39 +49,126 @@
     <div class="row">
       <div class="col-md-4">
         <h2>Scores</h2>
-        <h6>Video Clarity Score: {{ score_alt }}</h6>
-        <br/>
-        <h6>Weighted V.C.S. Score: {{ score_alt_weighted }}</h6>
-        <br/>
-        <p >Raw I.M.D. Score: {{ IMD_score }}</p>
+        <br>
+        <table>
+          <tr>
+            <th>Video Clarity Score</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>{{ score_alt }}</th>
+          </tr>
+          <tr>
+            <th>Weighted V.C.S. Score</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ score_alt_weighted }}</td>
+          </tr>
+          <tr>
+            <th>Raw I.M.D. Score</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ IMD_score }}</td>
+          </tr>
+        </table>
+        <br>
         <li><small class="text-muted">Top score is 100</small></li>
         <li><small class="text-muted">Weighted VCS is for 5 and 6 channel groups</small></li>
-        <li><small class="text-muted">Best in category gets weighted score of 100</small></li>
+        <li><small class="text-muted">Best 40chan group gets weighted score of 100</small></li>
       </div>
       <div class="col-md-4">
         <h2>Properties</h2>
-        <p >Closest IMD to channel: {{ closest_imd }} MHz</p>
-        <p >Number of problem IMD: {{ divide_by }}</p>
-        <p >Times IMD close to chan: {{ IMD_close_to_chan }}</p>
-        <p >Min VTX separation: {{ closest_broadcast }} MHz</p>
+        <br>
+        <table>
+          <tr>
+            <th>Closest IMD to channel</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ closest_imd }} MHz</td>
+          </tr>
+          <tr>
+            <th>Number of problem IMD</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ divide_by }}</td>
+          </tr>
+          <tr>
+            <th>Times IMD close to chan</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ IMD_close_to_chan }}</td>
+          </tr>
+          <tr>
+            <th>Min VTX separation</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ closest_broadcast }} MHz</td>
+          </tr>
+
+        </table>
+        
       </div>
       <div class="col-md-4">
         <h2>Problems</h2>
+        <br>
+        <table>
         {% for warning in warnings %}
-        <p >{{ warning }}</p>
+        <tr>
+          <td>{{ warning }}</td>
+        </tr>
         {% endfor %}
+        </table>
       </div>
     </div>
     <br/>
     <div class="row">
       <div class="col-md-4">
       </div>
+
       <div class="col-md-4">
         <h2>IMD Frequencies</h2>
-        {% for set in imd_freqz %}
-        <p >{{ set }}</p>
-        {% endfor %}
+        
+        <table border="1" bgcolor="orange">
+          <thead>
+            <tr>
+              <th>Chan</th>
+              {% for chan in converted %}
+              <th>{{ chan }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for sublist in imd_freqz %}
+          <tr>
+            {% for idx, freq in sublist %}
+              {% if idx == 0 %}
+              <th>{{ freq }}</th>
+              {% else %}
+              <td>{{ freq }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
       </div>
+
       <div class="col-md-4">
       </div>
   </div>

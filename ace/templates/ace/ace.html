@@ -20,7 +20,7 @@
       <p>Bands: A - B - E - F - R(C) - L   -- Channels: 1-8</p>
       <form method="POST" action="{% url 'analyze' %}" enctype="multipart/form-data">
       {% csrf_token %}
-      <input type="text" name="channel_group" placeholder="E.g. F1 5645"/>
+      <input type="text" name="channel_group" placeholder="E.g. F1 5645" minlength="5" maxlength="50" pattern="[a-ce-flrA-CE-FLR0-9\s]+" required/>
 
       <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" />
 

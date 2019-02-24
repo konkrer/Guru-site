@@ -216,8 +216,9 @@ class FreqSet:
             warnings.append("**Warning %s will have terrible interference! IMD exact match to VTX channel!**" % (group[i]))
             bad_match += 1
 
-    printable = self.convert_to_abbreviations()
-    converted = self.convert_freq_abbreviations()
+    printableish = self.convert_to_abbreviations()
+    printable = [x.upper() for x in printableish]
+    #converted = self.convert_freq_abbreviations()
 
     if printz:
       if (close == 0) and (bad_close ==  0) and (near == 0) and (bad_match) == 0:
@@ -255,17 +256,17 @@ class FreqSet:
       print("\n")
       print("                 ", end='')
       for chan in printable:
-        print (chan.upper(), end='   ')
+        print (chan, end='   ')
       
 
       print("\n")
       print("           ", end='')
-      for chan in converted:
+      for chan in group:
         print (chan, end='   ')
 
       print("\n\n\n")
 
-    return warnings, printable, converted
+    return warnings, printable
 
 
 
@@ -525,6 +526,7 @@ class FreqSet:
         else:
           score_alt = 100.0 * broadcast_factor
 
+    print(score_alt, IMD_score)
     score_alt = round(score_alt, 2)
     IMD_score = round(IMD_score, 2)
 
@@ -929,174 +931,4 @@ def check_channel_input(chan_input):
       return False
 
    
-
-'''
-l = len(channels)
-    
-    base_case = factorial(l, num_channels) / factorial(num_channels)
-
-
-    channel_1_used = []
-    combo_count = 0
-
-    while True:
-      for i in range(len(channels)):
-        
-        channel_1 = channels[i]
-        channel_1_used.append(channel_1)
-        channels_2 = [channel for channel in channels if channel not in channel_1_used] 
-        
-        channel_2_used = []
-        channels_2_redux = [channel for channel in channels_2]
-
-        if num_channels == 3:
-          channels_2_redux.pop()
-        elif num_channels == 4:
-          channels_2_redux.pop()
-          channels_2_redux.pop()
-        elif num_channels == 5:
-          channels_2_redux.pop()
-          channels_2_redux.pop()
-          channels_2_redux.pop()
-        elif num_channels == 6:
-          channels_2_redux.pop()
-          channels_2_redux.pop()
-          channels_2_redux.pop()
-          channels_2_redux.pop()
-        
-
-        for i in range(len(channels_2_redux)):
-          channel_2 = channels_2_redux[i]
-          channel_2_used.append(channel_2)
-          
-          channels_3 = [channel for channel in channels_2 if channel not in channel_2_used]
-          
-          channel_3_used = []
-          channels_3_redux = [channel for channel in channels_3]
-          if num_channels == 4:
-            channels_3_redux.pop()
-          elif num_channels == 5:
-            channels_3_redux.pop()
-            channels_3_redux.pop()
-          elif num_channels == 6:
-            channels_3_redux.pop()
-            channels_3_redux.pop()
-            channels_3_redux.pop()
-             
-
-          for i in range(len(channels_3_redux)):
-            channel_3 = channels_3_redux[i]
-          
-            if num_channels >= 4:
-
-              channel_3_used.append(channel_3)
-              channels_4 = [channel for channel in channels_3 if channel not in channel_3_used]
-              channel_4_used = []
-              channels_4_redux = [channel for channel in channels_4]
-              if num_channels == 5:
-                channels_4_redux.pop()
-              elif num_channels == 6:
-                channels_4_redux.pop()
-                channels_4_redux.pop()
-
-              for i in range(len(channels_4_redux)):
-                channel_4 = channels_4_redux[i]
-              
-                if num_channels >= 5:
-
-                  channel_4_used.append(channel_4)
-                  channels_5 = [channel for channel in channels_4 if channel not in channel_4_used]
-                  channel_5_used = []
-                  channels_5_redux = [channel for channel in channels_5]
-
-                  if num_channels == 6:
-
-                    channels_5_redux.pop()
-
-                  for i in range(len(channels_5_redux)):
-                    channel_5 = channels_5_redux[i]
-
-                    if num_channels == 6:
-                      channel_5_used.append(channel_5)
-                      channels_6 = [channel for channel in channels_5 if channel not in channel_5_used]
-                    
-                      for i in range(len(channels_6)):
-                        channel_6 = channels_6[i]
-
-                        self.group = [channel_1, channel_2, channel_3, channel_4, channel_5, channel_6]
-                        converted = self.convert_freq_abbreviations()
-                        print(self.group)
-                        self.score(converted)
-                        if self.scores[1] != None:
-                          if self.scores[1] >= score_limit: 
-                            self.export()
-
-                        combo_count += 1
-                        if combo_count == (int(base_case)):
-                          return
-                  
-              
-                    else:
-
-                      self.group = [channel_1, channel_2, channel_3, channel_4, channel_5]
-                      print(self.group)
-                      converted = self.convert_freq_abbreviations()
-                      self.score(converted)
-                      if self.scores[1] != None:
-                        if self.scores[1] >= score_limit: 
-                          self.export()
-
-                      combo_count += 1
-                      if combo_count == (int(base_case)):
-                        return 
-         
-                else:
-
-                  self.group = [channel_1, channel_2, channel_3, channel_4]
-                  print(self.group)
-                  converted = self.convert_freq_abbreviations()
-                  self.score(converted)
-                  if self.scores[0] >= score_limit:
-                    self.export()
-
-                  combo_count += 1
-                  if combo_count == (int(base_case)):
-                    return
-
-
-            else:
-
-              self.group = [channel_1, channel_2, channel_3]
-              print(self.group)
-              converted = self.convert_freq_abbreviations()
-              self.score(converted)
-              if self.scores[0] >= score_limit:
-                self.export()  
-
-              combo_count += 1
-              if combo_count == (int(base_case)):
-                return
-              
-            
-          
-def factorial(n, limit=None):
-
-  
-  if limit != None:
-    if limit == 1:
-      return n
-
-  if n == 1:
-    return n
-  
-  else:
-    
-    if limit != None:
-      return n * factorial(n-1, limit-1)
-    
-    else:
-      return n * factorial(n-1)
-'''      
-
-
 
