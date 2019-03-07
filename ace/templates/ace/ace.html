@@ -5,7 +5,16 @@
 {% block content %}
 {% if error %}
 <br/>
-<h2 class="text-center">{{ error }}</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-info" role="alert">
+        <h2 class="text-center">{{ error }}!</h2>
+      </div>     
+    </div>
+  </div>
+</div>
+
 <br/>
 {% endif %}
 

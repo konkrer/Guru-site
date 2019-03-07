@@ -5,60 +5,68 @@
 
 {% block content %}
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">VTX GURU</h1>
-      <p class="lead">FPV multi pilot video clarity tools.</p>
+      <h1 class="display-4 text-light">VTX GURU</h1>
+      <p class="lead text-light">FPV multi pilot video clarity tools.</p>
     </div>
 
     <div class="container">
+      <div class="row justify-content-center">
       <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 shadow-sm" onclick="window.location='{% url 'search' %}';" style="cursor: pointer;">
+        <div class="card mb-4 shadow-sm border-0" onclick="window.location='{% url 'search' %}';" style="cursor: pointer;  width: 22rem;">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Search</h4>
+            <h4 class="my-0 font-weight-normal text-info">Search</h4>
           </div>
           <div class="card-body">
           	<h1 class="card-title pricing-card-title">Make it work.</h1>
-          	<ul class="list-unstyled mt-3 mb-4">
-              <li>Find a high clarity VTX channel</li>
-              <li>group working with the channels</li>
-              <li>pilots are already on, so as</li>
-              <li>few as possible need to change</li>
-              <li>channel.</li>
+          	<ul class="list-unstyled mt-3 mb-0">
+              <li>Find a high clarity VTX</li>
+              <li>channel group working with the</li>
+              <li>channels pilots are already</li>
+              <li>on, so as few as possible</li>
+              <li>need to change channel.</li>
             </ul>
-            <button type="button" class="btn btn-lg btn-block btn-primary">Search</button>
+          </div>
+          <div class="card-footer bg-white border-0 pt-0">
+            <button type="button" class="btn btn-lg btn-block btn-info">Search</button>
           </div>
         </div>
-        <div class="card mb-4 shadow-sm" onclick="window.location='{% url 'tables' %}';" style="cursor: pointer;">
+        <div class="card mb-4 shadow-sm border-0" onclick="window.location='{% url 'tables' %}';" style="cursor: pointer;   width: 22rem;">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Look</h4>
+            <h4 class="my-0 font-weight-normal text-info">Look</h4>
           </div>
           <div class="card-body">
             <h1 class="card-title pricing-card-title">Find the best.</h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>See tables of channel groups</li>
-              <li>possessing a passing video</li>
-              <li>clarity score. See what the best</li>
+            <ul class="list-unstyled mt-3 mb-0">
+              <li>See tables of channel</li>
+              <li>groups possessing a</li>
+              <li>passing video clarity</li>
+              <li>score. See what the best</li>
               <li>scoring groups are!</li>
-            </ul>
-            <br/>
-            <button type="button" class="btn btn-lg btn-block btn-primary">Tables</button>
+            </ul>           
+          </div>
+          <div class="card-footer bg-white border-0">
+            <button type="button" class="btn btn-lg btn-block btn-info">Tables</button>
           </div>
         </div>
-        <div class="card mb-4 shadow-sm" onclick="window.location='{% url 'analyze' %}';" style="cursor: pointer;">
+        <div class="card mb-4 shadow-sm border-0" onclick="window.location='{% url 'analyze' %}';" style="cursor: pointer;   width: 22rem;">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Analyze</h4>
+            <h4 class="my-0 font-weight-normal text-info">Analyze</h4>
           </div>
           <div class="card-body">
             <h1 class="card-title pricing-card-title">Score group.</h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>Analyzes entered 5 GHZ VTX</li>
-              <li>channel group and produces</li>
-              <li>video clarity score and other</li>
-              <li>stats.</li>
-            </ul>
-            <br/>
-            <button type="button" class="btn btn-lg btn-block btn-primary">Analyze</button>
+            <ul class="list-unstyled mt-3 mb-0">
+              <li>Analyzes entered 5 GHZ</li>
+              <li>VTX channel group and </li>
+              <li>produces video clarity</li>
+              <li>score and other stats.</li>
+            </ul>          
+          </div>
+          <div class="card-footer bg-white border-0">
+            <button type="button" class="btn btn-lg btn-block btn-info">Analyze</button>
           </div>
         </div>
       </div>
+      </div>
+    </div>
 
 {% endblock %}

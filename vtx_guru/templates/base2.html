@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
 
     <title>VTX-Guru</title>
 
@@ -15,19 +15,18 @@
 
     <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
 
-
-
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/4.2/examples/pricing/pricing.css" rel="stylesheet">
+    
   </head>
 
-  <body>
+  <body style="background: url('https://s3.amazonaws.com/codecademy-content/courses/learn-css-selectors-visual-rules/hypnotize_bg.png'); background-size: 20%; background-repeat: repeat;">
 
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
       <img onclick="window.location='{% url 'home' %}';" style="cursor: pointer;" src="{% static 'guru (1).png' %}"  class="d-inline-block align-top" />
-      <h5  onclick="window.location='{% url 'home' %}';" style="cursor: pointer; "class="my-0 mr-md-auto text-white font-weight-normal">VTX-Guru</h5>
+      <h5  onclick="window.location='{% url 'home' %}';" style="cursor: pointer; color: azure;" class="my-0 mr-md-auto font-weight-normal" >VTX-Guru</h5>
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-white" href="{% url 'search' %}"><span class="oi oi-magnifying-glass"></span> Search</a>
+        <a class="p-2 text-white" href="{% url 'search' %}"><span class="oi oi-magnifying-glass" style="color: azure; font-size: 22px;"></span> Search</a>
         <a class="p-2 text-white" href="{% url 'tables' %}">Tables</a>
         <a class="p-2 text-white" href="{% url 'analyze' %}">Analyze</a>
         <a class="p-2 text-white" href="{% url 'scores' %}">About</a>
@@ -35,12 +34,8 @@
       <!--<a class="btn btn-outline-primary" href="#">Sign up</a>-->
     </div>
 
-
-
 {% block content %}
 {% endblock %}
-
-
 
     <div class="container">
       <footer class="pt-4 my-md-5 pt-md-5 border-top">
@@ -68,7 +63,7 @@
         </div>
       </footer>
     </div>
-
+  </body>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

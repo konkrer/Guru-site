@@ -3,17 +3,12 @@
 
 
 {% block content %}
-{% if error %}
-<br/>
-<h2 class="text-center">{{ error }}</h2>
-<br/>
-{% endif %}
 
 <main role="main">
-
+  
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
-    <div class="container">
+    <div class="container">  
       <h1 class="display-3">Smart Search <img src="{% static 'search.png' %}" height="90" width="90" /></h1>
       <p>Find a high clarity VTX channel group for three to six FPV pilots, while ensuring as few as possible pilots 
       need to change channels. VTX Guru will find the best rated groups that contain as many of the given channels 
@@ -106,31 +101,32 @@
         <h6 class="text-center">Number of 40 channel VTX's: {{ 40_avilb }}</h6>
         {% endif %}
         {% if chan_choices == '40 chan plus lowband' %}
-        <h6 class="text-center">Number of lowband VTX's: {{ low_avilb }} --|-- Number of 40 channel VTX's: {{ 40_avilb }}</h6>
+        <h6 class="text-center">Number of lowband VTX's: {{ low_avilb }} | Number of 40 channel VTX's: {{ 40_avilb }}</h6>
         {% endif %}
         <h6 class="text-center">Channels searched: -- 
         {% for channel in channels_abbrev %}
-        {{ channel }}
+        <span class="text-primary font-weight-bold" style="font-size: 24px">{{ channel }}</span>
         {% endfor %} -- 
         {% for channel in channels_freqz %}
-        {{ channel }}
+        <span class="text-secondary font-weight-bold" style="font-size: 20px">{{ channel }}
         {% endfor %}
         </h6>
         {% if locked_channels %}
-        <h6 class="text-center">Locked channels: -- 
+        <h6 class="text-center text-danger">Locked channels: -- 
         {% for channel in locked_channels %}
         {{ channel }}
         {% endfor %}
         {% endif %}
         </h6>
         <br/>
-        <br/>
       </div>
     </div> 
+    <div style="border: 3px solid black; height: 8px; border-radius: 5px; background-color: lightgrey;"></div>
     <div class="row">
       <div class="col-md-4">
-        <h5>{{ top_label }} channel matches</h5>
-        <table bgcolor="orange">
+        <br>
+        <h5 class="text-center">{{ top_label }} channel matches</h5>
+        <table class="bg-warning mx-auto">
           <thead>
             <tr>
               <th>V.C.S.</th>
@@ -155,8 +151,9 @@
       </div>
       <div class="col-md-4">
         {% if two_label != 'No' %}
-        <h5>{{ two_label }} matches <span><small class="text-muted"> (better scores?)</small></span></h5>
-        <table bgcolor="yellow">
+        <br>
+        <h5 class="text-center">{{ two_label }} matches <span><small class="text-muted"> (better scores?)</small></span></h5>
+        <table class="mx-auto bg-info">
           <thead>
             <tr>
               <th>V.C.S.</th>
@@ -182,8 +179,9 @@
       </div>
       <div class="col-md-4">
         {% if three_label != 'No' %}
-        <h5>{{ three_label }} matches <span><small class="text-muted"> (better scores?)</small></span></h5>
-        <table bgcolor="green">
+        <br>
+        <h5 class="text-center">{{ three_label }} matches <span><small class="text-muted"> (better scores?)</small></span></h5>
+        <table class="bg-success mx-auto">
           <thead>
             <tr>
               <th>V.C.S.</th>

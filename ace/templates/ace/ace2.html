@@ -3,15 +3,10 @@
  
 
 {% block content %}
-{% if error %}
-<br/>
-<h2 class="text-center">{{ error }}</h2>
-<br/>
-{% endif %}
 
 <main role="main">
 
-  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <!-- Main jumbotron -------------------------------------------->
   <div class="jumbotron">
     <div class="container">
       <h1 class="display-3">IMD Plus <img src="{% static 'wifi.png' %}" height="90" width="90" /></h1>
@@ -22,44 +17,46 @@
       <form method="POST" action="{% url 'analyze' %}" enctype="multipart/form-data">
       {% csrf_token %}
       <input type="text" name="channel_group" placeholder="E.g. F1 5645" minlength="5" maxlength="50" pattern="[a-ce-flrA-CE-FLR0-9\s]+" required/>
-
-      <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" /><span class="text-bold"><big>  
-      </span>
-      </big>
-    
-
+      <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" />
       </form>
+
     </div>
   </div>
-
+  <!-- END Main jumbotron -------------------------------------------->
   <div class="container">
-    <h4 class="text-center text-thin">
-      Channels: 
+    <!-- CHANNEL FREQUENCY DISPLAY ------------------------------------->
+    <h1 class="text-center text-thin text-primary" style="font-family: Verdana;">    
       {% for print in printable %}
-      {{ print }}  
+      {{ print }}
       {% endfor %}
-      -- Frequencies: 
+      <br>
+    </h1>
+    <h3 class="text-center text-thin text-black-50" style="font-family: Verdana;">
       {% for convert in converted %}
-      {{ convert }}
+      <small>{{ convert }}</small>
       {% endfor %}
-    </h4>
+    </h3>
+    <!-- END CHANNEL FREQUENCY DISPLAY -------------------------------->
+    
+    <div style="border: 3px solid black; height: 8px; border-radius: 5px; background-color: lightgrey;"></div>
     <br/>
-    <br/>
-    <!-- Example row of columns -->
+    <!-- TOP row of columns -->
     <div class="row">
+      <!-- SCORES ------------------------------------------------------>
       <div class="col-md-4">
-        <h2>Scores</h2>
         <br>
+        <h2 class="text-dark" style="font-family: Verdana;">Scores</h2>
+        <hr style="border-top: 1px solid black;">
         <table>
           <tr>
-            <th>Video Clarity Score</th>
+            <th style="font-size: 20px;">Video Clarity Score</th>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <th>{{ score_alt }}</th>
+            <th style="color: blue; font-size: 24px">{{ score_alt }}</th>
           </tr>
           <tr>
             <th>Weighted V.C.S. Score</th>
@@ -69,7 +66,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>{{ score_alt_weighted }}</td>
+            <td class="font-weight-bold">{{ score_alt_weighted }}</td>
           </tr>
           <tr>
             <th>Raw I.M.D. Score</th>
@@ -79,76 +76,96 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>{{ IMD_score }}</td>
+            <td class="font-weight-bold text-warning" >{{ IMD_score }}</td>
           </tr>
         </table>
         <br>
         <li><small class="text-muted">Top score is 100</small></li>
         <li><small class="text-muted">Weighted VCS is for 5 and 6 channel groups</small></li>
-        <li><small class="text-muted">Best 40chan group gets weighted score of 100</small></li>
+        <li><small class="text-muted">Best 40chan group has weighted score of 100</small></li>
       </div>
+      <!-- END SCORES ------------------------------------------------->
+      <!-- Properties ------------------------------------------------->
       <div class="col-md-4">
-        <h2>Properties</h2>
         <br>
+        <h2 class="text-dark" style="font-family: Verdana;">Properties</h2>
+        <hr style="border-top: 1px solid black;">
         <table>
+           <tr>
+            <th>Min VTX separation</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="font-weight-bold text-primary">{{ closest_broadcast }} MHz</td>
+          </tr>
           <tr>
             <th>Closest IMD to channel</th>
             <td></td>
             <td></td>
             <td></td>
-            <td>{{ closest_imd }} MHz</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="font-weight-bold text-warning">{{ closest_imd }} MHz</td>
           </tr>
           <tr>
             <th>Number of problem IMD</th>
             <td></td>
             <td></td>
             <td></td>
-            <td>{{ divide_by }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="font-weight-bold text-warning">{{ divide_by }}</td>
           </tr>
           <tr>
             <th>Times IMD close to chan</th>
             <td></td>
             <td></td>
             <td></td>
-            <td>{{ IMD_close_to_chan }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="font-weight-bold text-warning">{{ IMD_close_to_chan }}</td>
           </tr>
-          <tr>
-            <th>Min VTX separation</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{ closest_broadcast }} MHz</td>
-          </tr>
-
-        </table>
-        
+        </table>     
       </div>
+      <!-- END Properties ------------------------------------------->
+      <!-- Problems ------------------------------------------------->
       <div class="col-md-4">
-        <h2>Problems</h2>
         <br>
+        <h2 class="text-dark" style="font-family: Verdana;">Problems</h2>
+        <hr style="border-top: 1px solid black;">
         <table>
         {% for warning in warnings %}
         <tr>
-          <td>{{ warning }}</td>
+          <td class="text-danger">{{ warning }}</td>
         </tr>
         {% endfor %}
         </table>
       </div>
+      <!-- END Problems -------------------------------------------->
     </div>
+    <!-- END TOP row of columns -->
     <br/>
+    <!-- BOTTOM row of columns -->
     <div class="row">
-      <div class="col-md-4">
+      <!-- IMD Frequencies ----------------------------------------->
+      <div class="col-md-3">
       </div>
-
-      <div class="col-md-4">
-        <h2>IMD Frequencies</h2>
-        
-        <table border="1" bgcolor="orange">
+      <div class="col-md-6">
+        <br>
+        <h2 class="text-dark text-center" style="font-family: Verdana;">IMD Frequencies</h2>
+        <hr style="border-top: 1px solid black; width: 300px;">
+        <table border="1" class="mx-auto" style="width: minimax(200px, 500px);">
           <thead>
             <tr>
-              <th>Chan</th>
+              <th class="text-light bg-dark">Channels(MHz)</th>
               {% for chan in converted %}
-              <th>{{ chan }}</th>
+              <th class="bg-info">{{ chan }}</th>
               {% endfor %}
             </tr>
           </thead>
@@ -158,19 +175,20 @@
           <tr>
             {% for idx, freq in sublist %}
               {% if idx == 0 %}
-              <th>{{ freq }}</th>
+              <th class="bg-primary text-center">{{ freq }}</th>
               {% else %}
-              <td>{{ freq }}</td>
+              <td class="bg-warning">{{ freq }}</td>
               {% endif %}
             {% endfor %}
           </tr>
           {% endfor %}
           </tbody>
         </table>
+        <h5 class="text-secondary text-center">IMD equation: (2 x <span class="text-primary">F1)</span> - <span class="text-info">F2</span> = <span class="text-warning">F3</span></h5>
       </div>
-
-      <div class="col-md-4">
+      <div class="col-md-3">
       </div>
+      <!-- END IMD Frequencies ----------------------------------------->     
   </div>
 
 </main>

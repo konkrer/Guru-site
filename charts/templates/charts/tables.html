@@ -5,32 +5,30 @@
 {% block content %}
 
 <main role="main">
-
+  <div class="container">
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Tables  <img src="{% static 'guru.png' %}" height="90" width="90" class="d-inline-block align-top" /></h1>
-      <p class="lead text">Tables are grouped by number of pilots and VTX channel set investigated.</p>
-      <p class="lead text">Tables list channel groups with passing scores, from best to worst.</p>
+    
+      <h1 class="display-1 text-center">Tables  <img src="{% static 'guru.png' %}" height="90" width="90" class="d-inline-block align-top" /></h1>
+      <br>
+      <p class="lead text text-left">Tables are grouped by number of pilots and VTX channel set investigated. Tables list channel groups with passing scores, from best to worst.</p>
+      <br>
       <br/>
-      <p><a class="btn btn-primary btn-lg" href="{% static 'list6.pdf' %}" role="button">6 pilot -- 40 channel -- Best group: A4 E2 E4 E6 E8 F2 &raquo;</a></p>   
-        <p><a class="btn btn-primary btn-lg" href="{% static 'list6usa.pdf' %}" role="button">6 pilot -- USA only -- Best group: F2 F4 R1 R2 R7 R8 &raquo;</a></p>
-        <p><a class="btn btn-secondary btn-lg" href="{% static 'list6low_abrv.pdf' %}" role="button">6 pilot -- lowband -- Best group* A2 E8 R2 L1 L5 L8 &raquo;</a></p>
-      </p>
+        <p class="text-left"><a class="btn btn-info btn-lg" href="{% static 'list6.pdf' %}" role="button">6 pilot -- 40 channel -- Best group: A4 E2 E4 E6 E8 F2 &raquo;</a></p>   
+        <p class="text-left"><a class="btn btn-success btn-lg" href="{% static 'list6usa.pdf' %}" role="button">6 pilot -- USA only -- Best group: F2 F4 R1 R2 R7 R8 &raquo;</a></p>
+        <p class="text-left"><a class="btn btn-secondary btn-lg" href="{% static 'list6low_abrv.pdf' %}" role="button">6 pilot -- lowband -- Best group* A2 E8 R2 L1 L5 L8 &raquo;</a></p>
       <br/>
-      <p><a class="btn btn-primary btn-lg" href="{% static 'list5.pdf' %}" role="button">5 pilot -- 40 channel -- Best group* E2 E4 E6 E8 F2 &raquo;</a></p>
-      <p><a class="btn btn-primary btn-lg" href="{% static 'list5usa.pdf' %}" role="button">5 pilot -- USA only -- Best group: B3 F7 R1 R3 R8 &raquo;</a></p>
-      <p><a class="btn btn-secondary btn-lg" href="{% static 'list5low_abrv.pdf' %}" role="button">5 pilot -- lowband -- Best group* E8 F5 R1 L1 L6 &raquo;</a></p>	      
+        <p class="text-left"><a class="btn btn-info btn-lg" href="{% static 'list5.pdf' %}" role="button">5 pilot -- 40 channel -- Best group* E2 E4 E6 E8 F2 &raquo;</a></p>
+        <p class="text-left"><a class="btn btn-success btn-lg" href="{% static 'list5usa.pdf' %}" role="button">5 pilot -- USA only -- Best group: B3 F7 R1 R3 R8 &raquo;</a></p>
+        <p class="text-left"><a class="btn btn-secondary btn-lg" href="{% static 'list5low_abrv.pdf' %}" role="button">5 pilot -- lowband -- Best group* E8 F5 R1 L1 L6 &raquo;</a></p>	      
       <br/>   
-     	<p><a class="btn btn-primary btn-lg" href="{% static 'list4.pdf' %}" role="button">4 pilot -- 40 channel -- Best group* B1 E4 E8 F7 &raquo;</a></p>
-        <p><a class="btn btn-primary btn-lg" href="{% static 'list4usa.pdf' %}" role="button">4 pilot -- USA only -- Best group* R1 R3 R6 R8  &raquo;</a></p>
-        <p><a class="btn btn-secondary btn-lg" href="{% static 'list4low_abrv.pdf' %}" role="button">4 pilot -- lowband -- Best group* E8 R4 L1 L6 &raquo;</a></p>
-      </p>
+     	  <p class="text-left"><a class="btn btn-info btn-lg" href="{% static 'list4.pdf' %}" role="button">4 pilot -- 40 channel -- Best group* B1 E4 E8 F7 &raquo;</a></p>
+        <p class="text-left"><a class="btn btn-success btn-lg" href="{% static 'list4usa.pdf' %}" role="button">4 pilot -- USA only -- Best group* R1 R3 R6 R8  &raquo;</a></p>
+        <p class="text-left"><a class="btn btn-secondary btn-lg" href="{% static 'list4low_abrv.pdf' %}" role="button">4 pilot -- lowband -- Best group* E8 R4 L1 L6 &raquo;</a></p>
       <br/>  
-      	<p><a class="btn btn-primary btn-lg" href="{% static 'list3.pdf' %}" role="button">3 pilot -- 40 channel -- Best group* B3 E4 E8 &raquo;</a></p>
-        <p><a class="btn btn-primary btn-lg" href="{% static 'list3usa.pdf' %}" role="button">3 pilot -- USA only -- Best group* R1 R4 R8 &raquo;</a></p>
-        <p><a class="btn btn-secondary btn-lg" href="{% static 'list3low.pdf' %}" role="button">3 pilot -- lowband -- Best group* E8 R1 L1 &raquo;</a></p>
-      </p>
+      	<p class="text-left"><a class="btn btn-info btn-lg" href="{% static 'list3.pdf' %}" role="button">3 pilot -- 40 channel -- Best group* B3 E4 E8 &raquo;</a></p>
+        <p class="text-left"><a class="btn btn-success btn-lg" href="{% static 'list3usa.pdf' %}" role="button">3 pilot -- USA only -- Best group* R1 R4 R8 &raquo;</a></p>
+        <p class="text-left"><a class="btn btn-secondary btn-lg" href="{% static 'list3low.pdf' %}" role="button">3 pilot -- lowband -- Best group* E8 R1 L1 &raquo;</a></p>
       <br/>
       <li class="lead text-muted">Best group* (with astrik) means other groups have same top score. Not a clear "best".</li>
       <li class="lead text-muted">40 channel is all of bands A B E F & R(C)</li>
