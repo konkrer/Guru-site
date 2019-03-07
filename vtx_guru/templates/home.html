@@ -12,11 +12,11 @@
     <div class="container">
       <div class="row justify-content-center">
       <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 shadow-sm border-0" onclick="window.location='{% url 'search' %}';" style="cursor: pointer;  width: 22rem;">
-          <div class="card-header">
+        <div class="card mb-4 shadow-sm border-info bg-secondary" onclick="window.location='{% url 'search' %}';" style="cursor: pointer;  width: 22rem;">
+          <div class="card-header  bg-dark">
             <h4 class="my-0 font-weight-normal text-info">Search</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body text-light">
           	<h1 class="card-title pricing-card-title">Make it work.</h1>
           	<ul class="list-unstyled mt-3 mb-0">
               <li>Find a high clarity VTX</li>
@@ -26,15 +26,15 @@
               <li>need to change channel.</li>
             </ul>
           </div>
-          <div class="card-footer bg-white border-0 pt-0">
+          <div class="card-footer text-light border-0">
             <button type="button" class="btn btn-lg btn-block btn-info">Search</button>
           </div>
         </div>
-        <div class="card mb-4 shadow-sm border-0" onclick="window.location='{% url 'tables' %}';" style="cursor: pointer;   width: 22rem;">
-          <div class="card-header">
+        <div class="card mb-4 shadow-sm border-info bg-secondary" onclick="window.location='{% url 'tables' %}';" style="cursor: pointer;   width: 22rem;">
+          <div class="card-header bg-dark">
             <h4 class="my-0 font-weight-normal text-info">Look</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body text-light">
             <h1 class="card-title pricing-card-title">Find the best.</h1>
             <ul class="list-unstyled mt-3 mb-0">
               <li>See tables of channel</li>
@@ -44,15 +44,15 @@
               <li>scoring groups are!</li>
             </ul>           
           </div>
-          <div class="card-footer bg-white border-0">
+          <div class="card-footer text-light border-0">
             <button type="button" class="btn btn-lg btn-block btn-info">Tables</button>
           </div>
         </div>
-        <div class="card mb-4 shadow-sm border-0" onclick="window.location='{% url 'analyze' %}';" style="cursor: pointer;   width: 22rem;">
-          <div class="card-header">
+        <div class="card mb-4 shadow-sm border-info bg-secondary" onclick="window.location='{% url 'analyze' %}';" style="cursor: pointer;   width: 22rem;">
+          <div class="card-header bg-dark">
             <h4 class="my-0 font-weight-normal text-info">Analyze</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body text-light">
             <h1 class="card-title pricing-card-title">Score group.</h1>
             <ul class="list-unstyled mt-3 mb-0">
               <li>Analyzes entered 5 GHZ</li>
@@ -61,12 +61,13 @@
               <li>score and other stats.</li>
             </ul>          
           </div>
-          <div class="card-footer bg-white border-0">
+          <div class="card-footer text-light border-0">
             <button type="button" class="btn btn-lg btn-block btn-info">Analyze</button>
           </div>
         </div>
       </div>
       </div>
     </div>
+    <div style="height: 475px;"></div>
 
 {% endblock %}
