@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ci)^i$*co6-knm0&bu)zf4dh7w@=$6u9y2o#m8!hnm1xfp0^79'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['konkrer.pythonanywhere.com']
 
 
 # Application definition
@@ -75,12 +75,8 @@ WSGI_APPLICATION = 'vtx_guru.wsgi.application'
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'gurudb',
-            'USER': 'postgres',
-            'PASSWORD': '55lowball',
-            'HOST': 'localhost',
-            'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
