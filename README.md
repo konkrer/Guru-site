@@ -1,4 +1,4 @@
-                                   www.konkrer.pythonanywhere.com
+                                   https://www.konkrer.pythonanywhere.com
 
                                              VTX GURU     
                                       FPV IMD Analysis Tools
