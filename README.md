@@ -2,7 +2,7 @@
                                              VTX GURU     
                                       FPV IMD Analysis Tools
 
- https://www.konkrer.pythonanywhere.com
+ https://konkrer.pythonanywhere.com
 
 
 VTX Guru is a suite of tools for for FPV pilots, concerning having clear video when multiple pilots fly at once. 
