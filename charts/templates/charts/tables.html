@@ -11,7 +11,9 @@
     
       <h1 class="display-1 text-center">Tables  <img src="{% static 'guru.png' %}" height="90" width="90" class="d-inline-block align-top" /></h1>
       <br>
-      <p class="lead text text-left">Tables are grouped by number of pilots and VTX channel set investigated. Tables list channel groups with passing scores, from best to worst.</p>
+      <p class="lead text text-left">Tables are grouped by number of pilots and VTX channel set investigated. Tables list channel groups with passing scores, from best to worst.
+        These tables are used by Smart Search to find the best channel group for pilots so as few as possible pilots have to change channels.
+      </p>
       <br>
       <br/>
         <p class="text-left"><a class="btn btn-info btn-lg" href="{% static 'list6.pdf' %}" role="button">6 pilot -- 40 channel -- Best group: A4 E2 E4 E6 E8 F2 &raquo;</a></p>   
@@ -30,7 +32,7 @@
         <p class="text-left"><a class="btn btn-success btn-lg" href="{% static 'list3usa.pdf' %}" role="button">3 pilot -- USA only -- Best group* R1 R4 R8 &raquo;</a></p>
         <p class="text-left"><a class="btn btn-secondary btn-lg" href="{% static 'list3low.pdf' %}" role="button">3 pilot -- lowband -- Best group* E8 R1 L1 &raquo;</a></p>
       <br/>
-      <li class="lead text-muted">Best group* (with astrik) means other groups have same top score. Not a clear "best".</li>
+      <li class="lead text-muted">Best group* (with asterisk) means other groups have same top score. Not a clear "best".</li>
       <li class="lead text-muted">40 channel is all of bands A B E F & R(C)</li>
       <li class="lead text-muted">USA only is 40 channel set minus channels E4 E7 E8</li>
       <li class="lead text-muted">Lowband is 40 channel set plus lowband. </li>
