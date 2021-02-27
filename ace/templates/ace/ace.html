@@ -1,42 +1,56 @@
-{% extends 'base.html' %}
-{% load staticfiles %}
-
-
-{% block content %}
-{% if error %}
-<br/>
+{% extends 'base.html' %} {% load static %} {% block content %} {% if error %}
+<br />
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="alert alert-info" role="alert">
         <h2 class="text-center">{{ error }}!</h2>
-      </div>     
+      </div>
     </div>
   </div>
 </div>
 
-<br/>
+<br />
 {% endif %}
 
 <main role="main">
-
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">IMD Plus <img src="{% static 'wifi.png' %}" height="90" width="90" /></h1>
-      <p>Transmitting on two or more FPV video channels simultaneously can cause problems. Enter two or more channels to check for interference.
-      Enter Band Channel abbreviation and/or four digit frequency.</p> 
-      <p>Bands: A - B - E - F - R(C) - L   -- Channels: 1-8</p>
-      <form method="POST" action="{% url 'analyze' %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      <input type="text" name="channel_group" placeholder="E.g. F1 5645" minlength="5" maxlength="50" pattern="[a-ce-flrA-CE-FLR0-9\s]+" required/>
+      <h1 class="display-3">
+        IMD Plus <img src="{% static 'wifi.png' %}" height="90" width="90" />
+      </h1>
+      <p>
+        Transmitting on two or more FPV video channels simultaneously can cause
+        problems. Enter two or more channels to check for interference. Enter
+        Band Channel abbreviation and/or four digit frequency.
+      </p>
+      <p>Bands: A - B - E - F - R(C) - L -- Channels: 1-8</p>
+      <form
+        method="POST"
+        action="{% url 'analyze' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <input
+          type="text"
+          name="channel_group"
+          placeholder="E.g. F1 5645"
+          minlength="5"
+          maxlength="50"
+          pattern="[a-ce-flrA-CE-FLR0-9\s]+"
+          required
+        />
 
-      <input class="btn btn-primary" type="submit" value="Analyze" name="Analyze" />
-
+        <input
+          class="btn btn-primary"
+          type="submit"
+          value="Analyze"
+          name="Analyze"
+        />
       </form>
     </div>
   </div>
-  <div style="height: 649px;"></div>
-
+  <div style="height: 649px"></div>
 </main>
 {% endblock %}

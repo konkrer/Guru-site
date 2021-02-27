@@ -1,17 +1,17 @@
-{% extends 'base2.html' %}
-{% load staticfiles %}
-
-{% block content %}
+{% extends 'base2.html' %} {% load static %} {% block content %}
 
 <div class="container">
-    <!-- Example row of columns -->
-    <h2 class="text-center">Scores distribution per study group.</h2>
-    <br/>
-    <div class="row">
-      <div class="col-md-12">
-      	<img class="img-fluid" src="{% static 'plots/Scores_Dist_Boxchart.png' %}" />       
-      </div>
+  <!-- Example row of columns -->
+  <h2 class="text-center">Scores distribution per study group.</h2>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <img
+        class="img-fluid"
+        src="{% static 'plots/Scores_Dist_Boxchart.png' %}"
+      />
     </div>
+  </div>
 </div>
 
 {% endblock %}

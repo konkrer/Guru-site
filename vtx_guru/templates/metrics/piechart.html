@@ -1,17 +1,17 @@
-{% extends 'base2.html' %}
-{% load staticfiles %}
-
-{% block content %}
+{% extends 'base2.html' %} {% load static %} {% block content %}
 
 <div class="container">
-    <!-- Example row of columns -->
-    <h2 class="text-center">Bands distribution per study group.</h2>
-    <div class="row">
-      <div class="col-md-12">
-      	<br/>
-      	<img class="img-fluid" src="{% static 'plots/Band_Dist_Piechart.png' %}" />       
-      </div>
+  <!-- Example row of columns -->
+  <h2 class="text-center">Bands distribution per study group.</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <br />
+      <img
+        class="img-fluid"
+        src="{% static 'plots/Band_Dist_Piechart.png' %}"
+      />
     </div>
+  </div>
 </div>
 
 {% endblock %}

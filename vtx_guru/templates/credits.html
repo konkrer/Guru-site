@@ -1,33 +1,76 @@
-{% extends 'base2.html' %}
-{% load staticfiles %}
-
-
-{% block content %}
+{% extends 'base2.html' %} {% load static %} {% block content %}
 
 <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-12">
-      	<br/>
-        <h1 class="text-center">Credits for icons:</h1>
-        <br/>
-        <br/>
-        <br/>
-		<img src="{% static 'search.png' %}" height="90" width="90" />
-		<div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-		<br/>
-        <br/>
-        <img src="{% static 'guru.png' %}" height="90" width="90" class="d-inline-block align-top" />
-        <div>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-        <br/>
-        <br/>
-        <img src="{% static 'wifi.png' %}" height="90" width="90" />
-        <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-12">
+      <br />
+      <h1 class="text-center">Credits for icons:</h1>
+      <br />
+      <br />
+      <br />
+      <img src="{% static 'search.png' %}" height="90" width="90" />
+      <div>
+        Icons made by
+        <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from
+        <a href="https://www.flaticon.com/" title="Flaticon"
+          >www.flaticon.com</a
+        >
+        is licensed by
+        <a
+          href="http://creativecommons.org/licenses/by/3.0/"
+          title="Creative Commons BY 3.0"
+          target="_blank"
+          >CC 3.0 BY</a
+        >
+      </div>
+      <br />
+      <br />
+      <img
+        src="{% static 'guru.png' %}"
+        height="90"
+        width="90"
+        class="d-inline-block align-top"
+      />
+      <div>
+        Icons made by
+        <a href="https://www.flaticon.com/authors/becris" title="Becris"
+          >Becris</a
+        >
+        from
+        <a href="https://www.flaticon.com/" title="Flaticon"
+          >www.flaticon.com</a
+        >
+        is licensed by
+        <a
+          href="http://creativecommons.org/licenses/by/3.0/"
+          title="Creative Commons BY 3.0"
+          target="_blank"
+          >CC 3.0 BY</a
+        >
+      </div>
+      <br />
+      <br />
+      <img src="{% static 'wifi.png' %}" height="90" width="90" />
+      <div>
+        Icons made by
+        <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons"
+          >Smashicons</a
+        >
+        from
+        <a href="https://www.flaticon.com/" title="Flaticon"
+          >www.flaticon.com</a
+        >
+        is licensed by
+        <a
+          href="http://creativecommons.org/licenses/by/3.0/"
+          title="Creative Commons BY 3.0"
+          target="_blank"
+          >CC 3.0 BY</a
+        >
       </div>
     </div>
+  </div>
 </div>
-
-
 
 {% endblock %}
